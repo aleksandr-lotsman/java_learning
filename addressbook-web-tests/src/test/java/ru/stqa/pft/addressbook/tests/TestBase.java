@@ -14,9 +14,9 @@ import static org.testng.Assert.fail;
 public class TestBase {
 
     protected final ApplicationManager app = new ApplicationManager();
-    private WebDriver driver;
+    protected WebDriver driver;
     private String baseUrl;
-    private boolean acceptNextAlert = true;
+    protected boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
 //old test
    /* @BeforeClass(alwaysRun = true)
@@ -107,7 +107,7 @@ public class TestBase {
       }
     }
 
-    private String closeAlertAndGetItsText() {
+    public String closeAlertAndGetItsText() {
       try {
         Alert alert = driver.switchTo().alert();
         String alertText = alert.getText();
@@ -120,5 +120,17 @@ public class TestBase {
       } finally {
         acceptNextAlert = true;
       }
+    }
+
+    protected void confirmDeletion() {
+      driver.switchTo().alert().accept();
+    }
+
+    protected void deleteSelectedContact() {
+      driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Select all'])[1]/following::input[2]")).click();
+    }
+
+    protected void selectContact() {
+      driver.findElement(By.name("selected[]")).click();
     }
 }
