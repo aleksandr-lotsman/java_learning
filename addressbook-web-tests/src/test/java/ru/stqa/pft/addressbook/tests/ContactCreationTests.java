@@ -1,12 +1,11 @@
 package ru.stqa.pft.addressbook.tests;
 
-import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.testng.annotations.*;
 import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
+import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactCreationTests {
   private WebDriver driver;
@@ -21,23 +20,23 @@ public class ContactCreationTests {
     baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     driver.get("http://localhost/addressbook/");
-    login();
+    login("admin", "secret");
   }
 
-  private void login() {
+  private void login(String username, String password) {
     driver.findElement(By.name("user")).click();
     driver.findElement(By.name("user")).clear();
-    driver.findElement(By.name("user")).sendKeys("admin");
+    driver.findElement(By.name("user")).sendKeys(username);
     driver.findElement(By.name("pass")).click();
     driver.findElement(By.name("pass")).clear();
-    driver.findElement(By.name("pass")).sendKeys("secret");
+    driver.findElement(By.name("pass")).sendKeys(password);
     driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Password:'])[1]/following::input[2]")).click();
   }
 
   @Test
   public void testContactCreationTests() throws Exception {
     initContactCreation();
-    fillContactForm();
+    fillContactForm(new ContactData("firstName1", "lastName1", "address1", "phone1", "phone2"));
     submitContactForm();
     returtnToHomePage();
   }
@@ -50,24 +49,22 @@ public class ContactCreationTests {
     driver.findElement(By.name("submit")).click();
   }
 
-  private void fillContactForm() {
+  private void fillContactForm(ContactData contactData) {
     driver.findElement(By.name("firstname")).click();
     driver.findElement(By.name("firstname")).clear();
-    driver.findElement(By.name("firstname")).sendKeys("firstName");
-    driver.findElement(By.name("firstname")).clear();
-    driver.findElement(By.name("firstname")).sendKeys("firstName1");
+    driver.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
     driver.findElement(By.name("lastname")).click();
     driver.findElement(By.name("lastname")).clear();
-    driver.findElement(By.name("lastname")).sendKeys("lastName1");
+    driver.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
     driver.findElement(By.name("address")).click();
     driver.findElement(By.name("address")).clear();
-    driver.findElement(By.name("address")).sendKeys("address1");
+    driver.findElement(By.name("address")).sendKeys(contactData.getAddress());
     driver.findElement(By.name("home")).click();
     driver.findElement(By.name("home")).clear();
-    driver.findElement(By.name("home")).sendKeys("phone1");
+    driver.findElement(By.name("home")).sendKeys(contactData.getHomePhoneNumber());
     driver.findElement(By.name("mobile")).click();
     driver.findElement(By.name("mobile")).clear();
-    driver.findElement(By.name("mobile")).sendKeys("phone2");
+    driver.findElement(By.name("mobile")).sendKeys(contactData.getMobilePhoneNumber());
   }
 
   private void initContactCreation() {
