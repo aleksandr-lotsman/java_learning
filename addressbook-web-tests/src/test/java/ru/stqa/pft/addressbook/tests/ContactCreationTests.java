@@ -20,11 +20,11 @@ public class ContactCreationTests {
     driver = new FirefoxDriver();
     baseUrl = "https://www.katalon.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.get("http://localhost/addressbook/");
+    login();
   }
 
-  @Test
-  public void testContactCreationTests() throws Exception {
-    driver.get("http://localhost/addressbook/");
+  private void login() {
     driver.findElement(By.name("user")).click();
     driver.findElement(By.name("user")).clear();
     driver.findElement(By.name("user")).sendKeys("admin");
@@ -32,7 +32,25 @@ public class ContactCreationTests {
     driver.findElement(By.name("pass")).clear();
     driver.findElement(By.name("pass")).sendKeys("secret");
     driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Password:'])[1]/following::input[2]")).click();
-    driver.findElement(By.linkText("add new")).click();
+  }
+
+  @Test
+  public void testContactCreationTests() throws Exception {
+    initContactCreation();
+    fillContactForm();
+    submitContactForm();
+    returtnToHomePage();
+  }
+
+  private void returtnToHomePage() {
+    driver.findElement(By.linkText("home page")).click();
+  }
+
+  private void submitContactForm() {
+    driver.findElement(By.name("submit")).click();
+  }
+
+  private void fillContactForm() {
     driver.findElement(By.name("firstname")).click();
     driver.findElement(By.name("firstname")).clear();
     driver.findElement(By.name("firstname")).sendKeys("firstName");
@@ -50,8 +68,10 @@ public class ContactCreationTests {
     driver.findElement(By.name("mobile")).click();
     driver.findElement(By.name("mobile")).clear();
     driver.findElement(By.name("mobile")).sendKeys("phone2");
-    driver.findElement(By.name("submit")).click();
-    driver.findElement(By.linkText("home page")).click();
+  }
+
+  private void initContactCreation() {
+    driver.findElement(By.linkText("add new")).click();
   }
 
   @AfterClass(alwaysRun = true)
