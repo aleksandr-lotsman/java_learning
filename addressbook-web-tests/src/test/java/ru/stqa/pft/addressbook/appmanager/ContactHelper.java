@@ -30,4 +30,16 @@ public class ContactHelper extends HelperBase{
        click(By.linkText("add new"));
     }
 
+    public void confirmDeletion() {
+        confirmPopup();
+    }
+
+    public void deleteSelectedContact() {
+       click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Select all'])[1]/following::input[2]"));
+    }
+
+    public void selectContact() {
+        click(By.name("selected[]"));
+    }
+
 }
