@@ -42,4 +42,11 @@ public class ContactHelper extends HelperBase{
         click(By.name("selected[]"));
     }
 
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
+
+    public void initContactModification() {
+        click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='phone1phone2'])[1]/following::img[2]"));
+    }
 }
