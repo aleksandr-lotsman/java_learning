@@ -1,7 +1,10 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.BrowserType;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,13 +20,19 @@ public class ApplicationManager {
     private ContactHelper contactHelper;
     private String baseUrl;
     private StringBuffer verificationErrors = new StringBuffer();
+    private String browser;
 
-    public ApplicationManager() {
+    public ApplicationManager(String browser) {
+        this.browser = browser;
     }
 
     public void init() {
-        System.setProperty("webdriver.gecko.driver", "D:\\\\Program files\\Rep\\geckodriver.exe");
-        driver = new FirefoxDriver();
+        //System.setProperty("webdriver.gecko.driver", "D:\\\\Program files\\Rep\\geckodriver.exe");
+        if ( browser == BrowserType.FIREFOX){
+            driver = new FirefoxDriver();
+        } else if (browser == BrowserType.CHROME){
+            driver = new ChromeDriver();
+        }
         baseUrl = "https://www.katalon.com/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.get("http://localhost/addressbook/");
