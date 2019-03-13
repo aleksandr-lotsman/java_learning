@@ -55,4 +55,22 @@ public class ContactHelper extends HelperBase{
     public void initContactModification() {
         click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='phone1phone2'])[1]/following::img[2]"));
     }
+
+    public void createContact( ContactData contact, boolean param) {
+        initContactCreation();
+        fillContactForm(contact, param);
+        submitContactForm();
+        returtnToHomePage();
+    }
+
+    public void returtnToHomePage() {
+        if(isElementPresent(By.id("maintable"))){
+            return;
+        }
+        click(By.linkText("home page"));
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
 }
