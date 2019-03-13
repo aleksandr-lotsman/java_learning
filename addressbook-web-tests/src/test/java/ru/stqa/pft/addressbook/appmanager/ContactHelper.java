@@ -13,9 +13,6 @@ public class ContactHelper extends HelperBase{
         super(driver);
     }
 
-    public void returtnToHomePage() {
-        click(By.linkText("home page"));
-    }
 
     public void submitContactForm() {
         click(By.name("submit"));
