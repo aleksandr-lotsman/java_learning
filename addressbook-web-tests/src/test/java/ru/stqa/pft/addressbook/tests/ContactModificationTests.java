@@ -17,19 +17,17 @@ public class ContactModificationTests extends TestBase {
                     "address1", "phone1", "phone2", "test1"), true);
         }
         List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().initContactModification();
+        int index = before.size() - 1;
         ContactData contact = new ContactData("firstName2", "lastName2",
                 "address1", "phone1", "phone2", null);
-        app.getContactHelper().fillContactForm(contact, false);
-        app.getContactHelper().submitContactModification();
+        app.getContactHelper().modifyContact(index, contact);
         // have to create new contact because there is a bug: after submitting modification it is deleted from the list
         app.getContactHelper().createContact(new ContactData("firstName2", "lastName2",
                 "address1", "phone1", "phone2", "test1"), true);
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
 
-        //this won't work because of bug
+        //TODO this won't work because of bug with contacts
 //        before.remove(before.size() - 1);
 //        before.add(contact);
 //        Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
