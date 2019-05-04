@@ -13,8 +13,7 @@ public class ContactModificationTests extends TestBase {
     public void ensurePreconditions() {
         app.goTo().homePage();
         if (app.contact().list().size() == 0){
-            app.contact().create(new ContactData("firstName1", "lastName1",
-                    "address1", "phone1", "phone2", "test1"), true);
+            app.contact().create(new ContactData().withFirstName("firstName").withLastName("lastName").withGroup("test1"), true);
         }
     }
 
@@ -22,12 +21,10 @@ public class ContactModificationTests extends TestBase {
     public void testContactModificationTests(){
         List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
-        ContactData contact = new ContactData("firstName2", "lastName2",
-                "address1", "phone1", "phone2", null);
+        ContactData contact = new ContactData().withFirstName("firstName2").withLastName("lastName");
         app.contact().modify(index, contact);
         // have to create new contact because there is a bug: after submitting modification it is deleted from the list
-        app.contact().create(new ContactData("firstName2", "lastName2",
-                "address1", "phone1", "phone2", "test1"), true);
+        app.contact().create(new ContactData().withFirstName("firstName2").withLastName("lastName").withGroup("test1"), true);
         List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size());
 
