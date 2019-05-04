@@ -1,13 +1,11 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,14 +59,14 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='phone1phone2'])[1]/following::img[2]"));
     }
 
-    public void createContact( ContactData contact, boolean param) {
+    public void create(ContactData contact, boolean param) {
         initContactCreation();
         fillContactForm(contact, param);
         submitContactForm();
-        returtnToHomePage();
+        returnToHomePage();
     }
 
-    public void returtnToHomePage() {
+    public void returnToHomePage() {
         if(isElementPresent(By.id("maintable"))){
             return;
         }
@@ -79,7 +77,7 @@ public class ContactHelper extends HelperBase{
         return isElementPresent(By.name("selected[]"));
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = driver.findElements(By.xpath("//tr[@name='entry']"));
         for (WebElement element : elements) {
@@ -93,10 +91,16 @@ public class ContactHelper extends HelperBase{
     }
 
 
-    public void modifyContact(int index, ContactData contact) {
+    public void modify(int index, ContactData contact) {
         selectContact(index);
         initContactModification();
         fillContactForm(contact, false);
         submitContactModification();
+    }
+
+    public void delete(int index) {
+        selectContact(index);
+        deleteSelectedContact();
+        confirmDeletion();
     }
 }

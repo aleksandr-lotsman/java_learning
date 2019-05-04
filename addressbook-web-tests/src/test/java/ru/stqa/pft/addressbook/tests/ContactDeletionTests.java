@@ -12,24 +12,23 @@ public class ContactDeletionTests extends TestBase{
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.goTo().gotoHomePage();
-    if (! app.getContactHelper().isThereAContact()){
-      app.getContactHelper().createContact(new ContactData("firstName1", "lastName1",
+    app.goTo().homePage();
+    if (app.contact().list().size() == 0){
+      app.contact().create(new ContactData("firstName1", "lastName1",
               "address1", "phone1", "phone2", "test1"), true);
     }
   }
 
   @Test
   public void testContactDeletionTests() throws Exception {
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectContact(before.size() - 1);
-    app.getContactHelper().deleteSelectedContact();
-    app.getContactHelper().confirmDeletion();
-    app.goTo().gotoHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
+    List<ContactData> before = app.contact().list();
+    int index = before.size() - 1;
+    app.contact().delete(index);
+    app.goTo().homePage();
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() - 1);
 
-    before.remove(before.size() - 1);
+    before.remove(index);
     Assert.assertEquals(before, after);
   }
 }

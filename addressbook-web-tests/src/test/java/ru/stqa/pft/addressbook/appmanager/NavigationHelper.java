@@ -18,7 +18,7 @@ public class NavigationHelper extends HelperBase {
         click(By.linkText("groups"));
     }
 
-	public void gotoHomePage() {
+	public void homePage() {
 		if(isElementPresent(By.xpath("//input[@value='Send e-Mail']"))
 				&& driver.findElement(By.tagName("form")).getAttribute("name").equals("MainForm"))
 		{
