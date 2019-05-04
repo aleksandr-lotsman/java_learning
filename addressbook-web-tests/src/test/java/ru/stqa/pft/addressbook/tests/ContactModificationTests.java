@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.List;
+import java.util.Set;
 
 public class ContactModificationTests extends TestBase {
 
@@ -19,21 +20,18 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void testContactModificationTests(){
-        List<ContactData> before = app.contact().list();
-        int index = before.size() - 1;
-        ContactData contact = new ContactData().withFirstName("firstName2").withLastName("lastName");
-        app.contact().modify(index, contact);
+        Set<ContactData> before = app.contact().all();
+        ContactData modifiedContact = before.iterator().next();
+        ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstName("firstName2").withLastName("lastName");
+        app.contact().modify(contact);
         // have to create new contact because there is a bug: after submitting modification it is deleted from the list
         app.contact().create(new ContactData().withFirstName("firstName2").withLastName("lastName").withGroup("test1"), true);
         List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size());
 
         //TODO this won't work because of bug with contacts
-//        before.remove(before.size() - 1);
+//        before.remove(modifiedContact);
 //        before.add(contact);
-//        Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
-//        before.sort(byId);
-//        after.sort(byId);
 //        Assert.assertEquals(before, after);
 
 
