@@ -110,6 +110,7 @@ public class ContactHelper extends HelperBase{
         initContactModificationById(contact.getId());
         fillContactForm(contact, false);
         submitContactModification();
+        returnToHomePage();
     }
 
     public void delete(ContactData contact) {
