@@ -37,6 +37,9 @@ public class ContactHelper extends HelperBase{
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
+    public int count() {
+        return driver.findElements(By.name("selected[]")).size();
+    }
 
     public void initContactCreation() {
        click(By.linkText("add new"));
