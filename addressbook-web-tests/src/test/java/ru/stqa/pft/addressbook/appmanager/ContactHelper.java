@@ -9,9 +9,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase{
 
@@ -131,4 +129,14 @@ public class ContactHelper extends HelperBase{
     }
 
 
+    public ContactData infoFromEditForm(ContactData contact) {
+        initContactModificationById(contact.getId());
+        String firstName = driver.findElement(By.name("firstname")).getAttribute("value");
+        String lastName = driver.findElement(By.name("lastname")).getAttribute("value");
+        String homePhone = driver.findElement(By.name("home")).getAttribute("value");
+        String mobilePhone = driver.findElement(By.name("mobile")).getAttribute("value");
+        driver.navigate().back();
+        return new ContactData().withId(contact.getId()).withFirstName(firstName).withLastName(lastName)
+                .withHomePhoneNumber(homePhone).withMobilePhoneNumber(mobilePhone);
+    }
 }
