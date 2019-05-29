@@ -26,6 +26,7 @@ public class ContactHelper extends HelperBase{
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("address"), contactData.getAddress());
+        type(By.name("email"), contactData.getEmail());
         type(By.name("home"), contactData.getHomePhoneNumber());
         type(By.name("mobile"), contactData.getMobilePhoneNumber());
 
@@ -107,9 +108,10 @@ public class ContactHelper extends HelperBase{
             String lastName = element.findElement(By.xpath("td[2]")).getText();
             String allPhones = element.findElement(By.xpath("td[6]")).getText();
             String address = element.findElement(By.xpath("td[4]")).getText();
+            String email = element.findElement(By.xpath("td[5]")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
-            .withAllPhones(allPhones).withAddress(address));
+            .withAllPhones(allPhones).withAddress(address).withEmail(email));
         }
         return new Contacts(contactCache);
     }
@@ -137,6 +139,7 @@ public class ContactHelper extends HelperBase{
         String firstName = driver.findElement(By.name("firstname")).getAttribute("value");
         String lastName = driver.findElement(By.name("lastname")).getAttribute("value");
         String address = driver.findElement(By.name("address")).getText();
+        String email = driver.findElement(By.name("email")).getAttribute("value");
         String homePhone = driver.findElement(By.name("home")).getAttribute("value");
         String mobilePhone = driver.findElement(By.name("mobile")).getAttribute("value");
         driver.navigate().back();
@@ -145,6 +148,7 @@ public class ContactHelper extends HelperBase{
                 .withFirstName(firstName)
                 .withLastName(lastName)
                 .withAddress(address)
+                .withEmail(email)
                 .withHomePhoneNumber(homePhone)
                 .withMobilePhoneNumber(mobilePhone);
     }
