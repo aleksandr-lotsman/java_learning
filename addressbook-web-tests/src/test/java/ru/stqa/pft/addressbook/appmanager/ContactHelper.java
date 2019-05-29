@@ -106,9 +106,10 @@ public class ContactHelper extends HelperBase{
             String firstName = element.findElement(By.xpath("td[3]")).getText();
             String lastName = element.findElement(By.xpath("td[2]")).getText();
             String allPhones = element.findElement(By.xpath("td[6]")).getText();
+            String address = element.findElement(By.xpath("td[4]")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
-            .withAllPhones(allPhones));
+            .withAllPhones(allPhones).withAddress(address));
         }
         return new Contacts(contactCache);
     }
@@ -135,10 +136,16 @@ public class ContactHelper extends HelperBase{
         initContactModificationById(contact.getId());
         String firstName = driver.findElement(By.name("firstname")).getAttribute("value");
         String lastName = driver.findElement(By.name("lastname")).getAttribute("value");
+        String address = driver.findElement(By.name("address")).getText();
         String homePhone = driver.findElement(By.name("home")).getAttribute("value");
         String mobilePhone = driver.findElement(By.name("mobile")).getAttribute("value");
         driver.navigate().back();
-        return new ContactData().withId(contact.getId()).withFirstName(firstName).withLastName(lastName)
-                .withHomePhoneNumber(homePhone).withMobilePhoneNumber(mobilePhone);
+        return new ContactData()
+                .withId(contact.getId())
+                .withFirstName(firstName)
+                .withLastName(lastName)
+                .withAddress(address)
+                .withHomePhoneNumber(homePhone)
+                .withMobilePhoneNumber(mobilePhone);
     }
 }
