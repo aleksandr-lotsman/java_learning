@@ -152,4 +152,23 @@ public class ContactHelper extends HelperBase{
                 .withHomePhoneNumber(homePhone)
                 .withMobilePhoneNumber(mobilePhone);
     }
+
+    public ContactData infoFromDetailsPage(ContactData contact) {
+        initContactModificationById(contact.getId());
+        String firstName = driver.findElement(By.name("firstname")).getAttribute("value");
+        String lastName = driver.findElement(By.name("lastname")).getAttribute("value");
+        String address = driver.findElement(By.name("address")).getText();
+        String email = driver.findElement(By.name("email")).getAttribute("value");
+        String homePhone = driver.findElement(By.name("home")).getAttribute("value");
+        String mobilePhone = driver.findElement(By.name("mobile")).getAttribute("value");
+        driver.navigate().back();
+        return new ContactData()
+                .withId(contact.getId())
+                .withFirstName(firstName)
+                .withLastName(lastName)
+                .withAddress(address)
+                .withEmail(email)
+                .withHomePhoneNumber(homePhone)
+                .withMobilePhoneNumber(mobilePhone);
+    }
 }
