@@ -36,6 +36,15 @@ public class ContactHelper extends HelperBase{
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
+
+    public void fillContactFormWithutGroup(ContactData contactData) {
+        type(By.name("firstname"), contactData.getFirstName());
+        type(By.name("lastname"), contactData.getLastName());
+        type(By.name("address"), contactData.getAddress());
+        type(By.name("email"), contactData.getEmail());
+        type(By.name("home"), contactData.getHomePhoneNumber());
+        type(By.name("mobile"), contactData.getMobilePhoneNumber());
+    }
     public int count() {
         return driver.findElements(By.name("selected[]")).size();
     }
@@ -67,6 +76,14 @@ public class ContactHelper extends HelperBase{
     public void create(ContactData contact, boolean param) {
         initContactCreation();
         fillContactForm(contact, param);
+        submitContactForm();
+        contactCache = null;
+        returnToHomePage();
+    }
+
+    public void createWithoutGroup(ContactData contact) {
+        initContactCreation();
+        fillContactFormWithutGroup(contact);
         submitContactForm();
         contactCache = null;
         returnToHomePage();
@@ -154,21 +171,14 @@ public class ContactHelper extends HelperBase{
     }
 
     public ContactData infoFromDetailsPage(ContactData contact) {
-        initContactModificationById(contact.getId());
-        String firstName = driver.findElement(By.name("firstname")).getAttribute("value");
-        String lastName = driver.findElement(By.name("lastname")).getAttribute("value");
-        String address = driver.findElement(By.name("address")).getText();
-        String email = driver.findElement(By.name("email")).getAttribute("value");
-        String homePhone = driver.findElement(By.name("home")).getAttribute("value");
-        String mobilePhone = driver.findElement(By.name("mobile")).getAttribute("value");
+        openDetailsPageById(contact.getId());
+        String allData = driver.findElement(By.id("content")).getText();
         driver.navigate().back();
         return new ContactData()
-                .withId(contact.getId())
-                .withFirstName(firstName)
-                .withLastName(lastName)
-                .withAddress(address)
-                .withEmail(email)
-                .withHomePhoneNumber(homePhone)
-                .withMobilePhoneNumber(mobilePhone);
+                .withAllData(allData);
+    }
+
+    private void openDetailsPageById(int id) {
+        click(By.xpath("//a[contains(@href, 'id="+ id +"')]//img"));
     }
 }
