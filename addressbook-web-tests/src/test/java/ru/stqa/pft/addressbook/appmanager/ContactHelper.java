@@ -29,10 +29,13 @@ public class ContactHelper extends HelperBase{
         type(By.name("email"), contactData.getEmail());
         type(By.name("home"), contactData.getHomePhoneNumber());
         type(By.name("mobile"), contactData.getMobilePhoneNumber());
+        attach(By.name("photo"), contactData.getPhoto());
 
         if (creation){
-            new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-        }else{
+            if (contactData.getGroup() != null) {
+                new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            }
+         }else{
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
