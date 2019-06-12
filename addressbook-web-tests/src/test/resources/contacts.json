@@ -1,0 +1,26 @@
+[
+  {
+    "firstName": "First 0",
+    "lastName": "Last 0",
+    "address": "vul.Some 0",
+    "homePhoneNumber": "111",
+    "mobilePhoneNumber": "222",
+    "email": "000@mail.ru"
+  },
+  {
+    "firstName": "First 1",
+    "lastName": "Last 1",
+    "address": "vul.Some 1",
+    "homePhoneNumber": "222",
+    "mobilePhoneNumber": "333",
+    "email": "111@mail.ru"
+  },
+  {
+    "firstName": "First 2",
+    "lastName": "Last 2",
+    "address": "vul.Some 2",
+    "homePhoneNumber": "333",
+    "mobilePhoneNumber": "444",
+    "email": "222@mail.ru"
+  }
+]
