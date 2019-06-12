@@ -10,4 +10,5 @@ dependencies {
     compile("org.seleniumhq.selenium:selenium-java:3.141.59")
     compile("org.testng:testng:7.0.0-beta3")
     compile("org.hamcrest:java-hamcrest:2.0.0.0")
+    compile group: 'com.beust', name: 'jcommander', version: '1.48'
 }
