@@ -24,3 +24,7 @@ hs_err_pid*
 .idea/workspace.xml
 *.xml
 addressbook-web-tests/out/test/classes/META-INF/addressbook-web-tests.main.kotlin_module
+addressbook-web-tests/.gradle/5.1.1/executionHistory/executionHistory.bin
+addressbook-web-tests/.gradle/5.1.1/executionHistory/executionHistory.lock
+addressbook-web-tests/.gradle/5.1.1/fileHashes/fileHashes.bin
+addressbook-web-tests/.gradle/5.1.1/fileHashes/fileHashes.lock
