@@ -22,7 +22,6 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 .idea/workspace.xml
-*.xml
 addressbook-web-tests/out/test/classes/META-INF/addressbook-web-tests.main.kotlin_module
 addressbook-web-tests/.gradle/5.1.1/executionHistory/executionHistory.bin
 addressbook-web-tests/.gradle/5.1.1/executionHistory/executionHistory.lock
