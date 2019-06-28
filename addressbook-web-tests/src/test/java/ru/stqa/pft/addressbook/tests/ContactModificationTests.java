@@ -24,19 +24,8 @@ public class ContactModificationTests extends TestBase {
         ContactData modifiedContact = before.iterator().next();
         ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstName("firstName2").withLastName("lastName");
         app.contact().modify(contact);
-        // have to create new contact because there is a bug: after submitting modification it is deleted from the list
-        app.contact().create(new ContactData().withFirstName("firstName2").withLastName("lastName").withGroup("test1"), true);
         assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.contact().all();
-
-        assertThat(after, equalTo(before.without(contact)));
-
-        //TODO this won't work because of bug with contacts
-//        before.remove(modifiedContact);
-//        before.add(contact);
-//        Assert.assertEquals(before, after);
-
-
-
+        assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
     }
 }
