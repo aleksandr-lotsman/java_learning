@@ -56,9 +56,29 @@ public class ContactData {
     @Transient
     private String allData;
 
-    @Column(name = "photo")
-    @Type(type = "text")
-    private String photo;
+    @Transient
+    private File photo;
+
+    @Column(name = "company")
+    private String company;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return id == that.id &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(company, that.company);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, address, email, company);
+    }
 
     public ContactData withId(int id) {
         this.id = id;
@@ -111,12 +131,20 @@ public class ContactData {
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo.getPath();
+        this.photo = photo;
         return this;
     }
 
     public int getId() {
         return id;
+    }
+    public ContactData withCompany(String company) {
+        this.company = company;
+        return this;
+    }
+
+    public String getCompany() {
+        return company;
     }
 
     public String getFirstName() {
@@ -156,7 +184,7 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        return new File(photo);
+        return photo;
     }
 
     @Override
@@ -168,17 +196,4 @@ public class ContactData {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData that = (ContactData) o;
-        return id == that.id &&
-                Objects.equals(firstName, that.firstName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName);
-    }
 }
