@@ -59,6 +59,7 @@ public class ContactData {
     @Transient
     private File photo;
 
+    @Expose
     @Column(name = "company")
     private String company;
 
