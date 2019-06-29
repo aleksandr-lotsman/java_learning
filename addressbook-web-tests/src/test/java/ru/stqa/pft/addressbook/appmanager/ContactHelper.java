@@ -9,6 +9,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -201,5 +202,15 @@ public class ContactHelper extends HelperBase{
     public void filterListByGroup(int id) {
         Select group = new Select(driver.findElement(By.name("group")));
         group.selectByValue(String.valueOf(id));
+    }
+
+    public void removeContactFromGroup(ContactData contactToRemove) {
+        selectContactById(contactToRemove.getId());
+        click(By.name("remove"));
+    }
+
+    public void showAllContacts() {
+        Select group = new Select(driver.findElement(By.name("group")));
+        group.selectByVisibleText("[all]");
     }
 }
