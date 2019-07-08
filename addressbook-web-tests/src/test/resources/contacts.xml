@@ -1,0 +1,26 @@
+<list>
+  <contacts>
+    <firstName>First 0</firstName>
+    <lastName>Last 0</lastName>
+    <address>vul.Some 0</address>
+    <homePhoneNumber>111</homePhoneNumber>
+    <mobilePhoneNumber>222</mobilePhoneNumber>
+    <email>000@mail.ru</email>
+  </contacts>
+  <contacts>
+    <firstName>First 1</firstName>
+    <lastName>Last 1</lastName>
+    <address>vul.Some 1</address>
+    <homePhoneNumber>222</homePhoneNumber>
+    <mobilePhoneNumber>333</mobilePhoneNumber>
+    <email>111@mail.ru</email>
+  </contacts>
+  <contacts>
+    <firstName>First 2</firstName>
+    <lastName>Last 2</lastName>
+    <address>vul.Some 2</address>
+    <homePhoneNumber>333</homePhoneNumber>
+    <mobilePhoneNumber>444</mobilePhoneNumber>
+    <email>222@mail.ru</email>
+  </contacts>
+</list>
